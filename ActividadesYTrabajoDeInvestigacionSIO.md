@@ -1588,5 +1588,409 @@ echo "===================="
 echo "Dispositivos de bloque:"
 lsblk
 ```
+3. - Fecha y hora:
+Incluir la fecha y hora en el nombre del archivo de salida para mantener un historial.
+```bash
+output="resumendispositivos_$(date +%F_%T).txt"
+```
+4. - Compresión de salida:
+Comprimir el archivo de salida automáticamente si la información es extensa.
+```bash
+gzip $output
+```
+5. - Filtrado avanzado:
+Agregar comandos adicionales para filtrar resultados, como mostrar solo dispositivos USB específicos o tarjetas de sonido activas.
+---
+# Resumen
+Crear un script permite automatizar, organizar y guardar información clave sobre dispositivos de entrada y salida. Es flexible, fácil de ampliar y proporciona resultados rápidos, precisos y reutilizables.
+---
+# Actividad 6: Reflexión y discusión
+
+## Objetivo
+Analizar la importancia del manejo de dispositivos en sistemas Linux.
+
+## Instrucciones
+Reflexione sobre lo aprendido y discuta en equipo:
+- ¿Qué comando encontró más útil y por qué?
+- ¿Qué tan importante es conocer los dispositivos conectados al sistema?
+- ¿Cómo podrían estos conocimientos aplicarse en la administración de sistemas?
+# Reflexiones sobre los comandos
+
+## Comando más útil:
+
+**lsblk o fdisk -l**:  
+Muchos podrían considerar que estos comandos son los más útiles, ya que proporcionan una visión clara de los dispositivos de almacenamiento y sus particiones. Conocer la estructura de los discos y particiones es esencial para la administración de datos, la instalación de sistemas operativos y la recuperación de información.  
+
+**xrandr**:  
+Para aquellos que trabajan con configuraciones de pantalla, *xrandr* es invaluable, ya que permite gestionar múltiples monitores y ajustar resoluciones de manera dinámica.  
+
+**aplay -l**:  
+Para los administradores de sistemas que manejan audio, este comando es crucial para identificar y gestionar dispositivos de sonido.
+
+## Importancia de conocer los dispositivos conectados al sistema:
+
+- **Diagnóstico y resolución de problemas**:  
+  Conocer los dispositivos conectados permite a los administradores diagnosticar problemas de hardware y software de manera más efectiva. Por ejemplo, si un dispositivo no funciona correctamente, saber qué dispositivos están conectados y cómo se configuran puede ayudar a identificar la causa del problema.
+
+- **Optimización del rendimiento**:  
+  Entender cómo se utilizan los dispositivos puede ayudar a optimizar el rendimiento del sistema. Por ejemplo, si se sabe que un disco duro está casi lleno, se pueden tomar medidas para liberar espacio o agregar almacenamiento adicional.
+
+- **Seguridad**:  
+  Conocer los dispositivos conectados también es importante para la seguridad del sistema. Los administradores deben estar al tanto de cualquier dispositivo no autorizado que pueda estar conectado, lo que podría representar un riesgo de seguridad.
+
+## Aplicaciones en la administración de sistemas:
+
+- **Configuración y mantenimiento**:  
+  Los conocimientos sobre dispositivos son esenciales para la configuración inicial de un sistema y su mantenimiento continuo. Esto incluye la instalación de controladores, la configuración de dispositivos de red y la gestión de dispositivos de almacenamiento.
+
+- **Automatización de tareas**:  
+  Los administradores pueden utilizar scripts que incorporen estos comandos para automatizar tareas relacionadas con la gestión de dispositivos, como la verificación de estado, la configuración de dispositivos de red o la monitorización del uso de recursos.
+
+- **Planificación de capacidad**:  
+  Conocer los dispositivos y su rendimiento permite a los administradores planificar la capacidad del sistema, asegurando que haya suficientes recursos para satisfacer las necesidades de los usuarios y las aplicaciones.
+
+## Conclusión
+
+El manejo de dispositivos en sistemas Linux es un aspecto crítico de la administración de sistemas. Los comandos que permiten explorar y gestionar dispositivos son herramientas esenciales para cualquier administrador de sistemas. La capacidad de diagnosticar problemas, optimizar el rendimiento y garantizar la seguridad del sistema depende en gran medida de un buen entendimiento de los dispositivos conectados.
+---
+# Comandos de Entrada y Salida, Discos y Archivos  
+
+## Ejercicio 1: Montar y Desmontar Discos  
+**Objetivo**: Aprender a montar y desmontar un dispositivo externo.  
+Inserta una memoria USB en el sistema.  
+Encuentra el dispositivo usando el comando:  
+
+      lsblk  
+o  
+
+      fdisk -l  
+Monta la memoria USB en un directorio, por ejemplo, `/mnt/usb`:  
+
+      sudo mount /dev/sdX1 /mnt/usb  
+Verifica que esté montado correctamente:  
+
+      df -h  
+Copia un archivo desde tu directorio personal al dispositivo USB:  
+
+      cp archivo.txt /mnt/usb/  
+Desmonta la memoria USB:  
+
+      sudo umount /mnt/usb  
+
+# Montar y Desmontar una Memoria USB en Linux  
+
+## Paso 1: Insertar la memoria USB  
+Inserta la memoria USB en uno de los puertos USB de tu computadora.  
+
+## Paso 2: Encontrar el dispositivo  
+Utiliza uno de los siguientes comandos para identificar el dispositivo USB:  
+
+**Opción 1: lsblk**  
+Este comando lista todos los dispositivos de bloque conectados al sistema.  
+
+      lsblk  
+
+**Opción 2: fdisk -l**  
+Este comando muestra información sobre las particiones de los discos conectados.  
+
+      sudo fdisk -l  
+
+**Observaciones**:  
+Busca una entrada que corresponda a tu memoria USB. Generalmente, será algo como `/dev/sdb1` o `/dev/sdc1`, dependiendo de cuántos dispositivos de almacenamiento tengas conectados.  
+
+## Paso 3: Montar la memoria USB  
+Crea un directorio donde montarás la memoria USB (si no existe ya):  
+
+      sudo mkdir -p /mnt/usb  
+
+Luego, monta la memoria USB en el directorio creado:  
+
+      sudo mount /dev/sdX1 /mnt/usb  
+
+**Nota**: Reemplaza `sdX1` con el identificador correcto de tu dispositivo USB (por ejemplo, `sdb1`).  
+
+## Paso 4: Verificar que esté montado correctamente  
+Utiliza el siguiente comando para verificar que la memoria USB esté montada:  
+
+      df -h  
+
+**Observaciones**:  
+Busca una línea que muestre `/mnt/usb` y verifica que el tamaño y el uso del espacio sean correctos.  
+
+## Paso 5: Copiar un archivo al dispositivo USB  
+Copia un archivo desde tu directorio personal a la memoria USB. Por ejemplo, si tienes un archivo llamado `archivo.txt` en tu directorio personal:  
+
+      cp ~/archivo.txt /mnt/usb/  
+
+## Paso 6: Desmontar la memoria USB  
+Una vez que hayas terminado de usar la memoria USB, es importante desmontarla correctamente para evitar la pérdida de datos:  
+
+      sudo umount /mnt/usb  
+
+## Resumen  
+Estos pasos te permiten montar y desmontar un dispositivo externo, como una memoria USB, en un sistema Linux. Es fundamental seguir este proceso para asegurar que los datos se transfieran correctamente y que el dispositivo se desconecte de manera segura.  
+
+# Ejercicio 2: Redirección de Entrada y Salida  
+
+## Objetivo  
+Usar redirección para guardar la salida de comandos en archivos.  
+
+1. Lista los archivos de tu directorio actual y guarda el resultado en un archivo `listado.txt`:  
+```bash
+      ls -l > listado.txt  
+```
+2. Muestra el contenido del archivo en la terminal:  
+```bash
+      cat listado.txt  
+```
+3. Añade la fecha actual al final del archivo:  
+```bash
+      date >> listado.txt  
+```
+4. Muestra todo el contenido del archivo nuevamente:  
+```bash
+      cat listado.txt  
+```
+# Redirección de Entrada y Salida en Linux  
+
+## Paso 1: Listar los archivos y guardar la salida en un archivo  
+Utiliza el siguiente comando para listar los archivos en tu directorio actual y guardar el resultado en un archivo llamado `listado.txt`:  
+
+      ls -l > listado.txt  
+
+**Explicación**:  
+- **ls -l**: Lista los archivos y directorios en el directorio actual en un formato detallado.  
+- **>**: Redirige la salida del comando a un archivo. Si el archivo ya existe, se sobrescribirá.  
+- **listado.txt**: Es el nombre del archivo donde se guardará la salida.  
+
+## Paso 2: Mostrar el contenido del archivo en la terminal  
+Para ver el contenido del archivo que acabas de crear, utiliza el siguiente comando:  
+
+      cat listado.txt  
+
+**Explicación**:  
+- **cat**: Concatena y muestra el contenido de archivos. En este caso, mostrará el contenido de `listado.txt`.  
+
+## Paso 3: Añadir la fecha actual al final del archivo  
+Para agregar la fecha actual al final del archivo `listado.txt`, utiliza el siguiente comando:  
+
+      date >> listado.txt  
+
+**Explicación**:  
+- **date**: Muestra la fecha y hora actuales.  
+- **>>**: Redirige la salida del comando al final del archivo. A diferencia de `>`, que sobrescribe el archivo, `>>` añade la salida al final del archivo existente.  
+
+## Paso 4: Mostrar todo el contenido del archivo nuevamente  
+Para ver el contenido actualizado del archivo, que ahora incluye la lista de archivos y la fecha, utiliza el siguiente comando:  
+
+      cat listado.txt  
+
+## Resumen  
+Estos pasos te permiten practicar la redirección de entrada y salida en un sistema Linux. Has aprendido a:  
+- Listar archivos y guardar la salida en un archivo.  
+- Mostrar el contenido de un archivo en la terminal.  
+- Añadir información al final de un archivo existente.  
+
+La redirección es una técnica muy útil en la administración de sistemas y en la automatización de tareas.  
+
+# Ejercicio 3: Copiar y Mover Archivos  
+
+## Objetivo  
+Practicar copiar y mover archivos y directorios.  
+
+1. Crea un archivo de texto llamado `archivo1.txt`:  
+```bash
+      echo "Este es un archivo de prueba" > archivo1.txt  
+```
+2. Copia este archivo a otro directorio, por ejemplo, `/tmp`:  
+```bash
+      cp archivo1.txt /tmp/  
+```
+3. Renombra el archivo copiado a `archivo2.txt` en `/tmp`:  
+```bash
+      mv /tmp/archivo1.txt /tmp/archivo2.txt  
+```
+4. Mueve el archivo `archivo2.txt` de vuelta a tu directorio actual:  
+```bash
+      mv /tmp/archivo2.txt .  
+```
+## Paso 1: Crear un archivo de texto  
+Primero, vamos a crear un archivo de texto llamado `archivo1.txt` utilizando el comando `echo`:  
+
+      echo "Este es un archivo de prueba" > archivo1.txt  
+
+**Explicación**:  
+- **echo "Este es un archivo de prueba"**: Este comando imprime el texto entre comillas.  
+- **>**: Este operador redirige la salida del comando al archivo `archivo1.txt`. Si el archivo no existe, se creará; si ya existe, se sobrescribirá.  
+
+## Paso 2: Copiar el archivo a otro directorio  
+Ahora, copia el archivo `archivo1.txt` al directorio `/tmp`:  
+
+      cp archivo1.txt /tmp/  
+
+**Explicación**:  
+- **cp**: Este comando se utiliza para copiar archivos y directorios.  
+- **archivo1.txt**: Es el archivo que deseas copiar.  
+- **/tmp/**: Es el destino donde se copiará el archivo.  
+
+## Paso 3: Renombrar el archivo copiado  
+Renombra el archivo copiado a `archivo2.txt` en el directorio `/tmp`:  
+
+      mv /tmp/archivo1.txt /tmp/archivo2.txt  
+
+**Explicación**:  
+- **mv**: Este comando se utiliza para mover o renombrar archivos y directorios.  
+- **/tmp/archivo1.txt**: Es la ruta del archivo que deseas renombrar.  
+- **/tmp/archivo2.txt**: Es el nuevo nombre del archivo.  
+
+## Paso 4: Mover el archivo de vuelta a tu directorio actual  
+Finalmente, mueve el archivo `archivo2.txt` de vuelta a tu directorio actual:  
+
+      mv /tmp/archivo2.txt .  
+
+**Explicación**:  
+- **.**: Este símbolo representa el directorio actual. Al usarlo como destino, estás indicando que deseas mover el archivo al directorio en el que te encuentras actualmente.  
+
+## Resumen  
+Estos pasos te permiten practicar cómo copiar y mover archivos en un sistema Linux. Has aprendido a:  
+- Crear un archivo de texto.  
+- Copiar un archivo a otro directorio.  
+- Renombrar un archivo en un directorio.  
+- Mover un archivo de un directorio a otro.  
+
+La manipulación de archivos es una habilidad fundamental en la administración de sistemas y en el uso diario de Linux.  
+
+# Ejercicio 4: Comprimir y Descomprimir Archivos
+
+**Objetivo:** Aprender a trabajar con compresión de archivos.
+
+1. Crea un directorio llamado `backup` y copia algunos archivos en él.
+
+2. Comprime el directorio `backup` en un archivo `.tar.gz`:
+
+   ```bash
+   tar -czvf backup.tar.gz backup/
+3. Borra el directorio original y extrae el contenido del archivo comprimido:
+    ```bash
+    tar -xzvf backup.tar.gz
+## Paso 1: Crear un directorio llamado `backup`
+
+Primero, crea un directorio llamado `backup` y copia algunos archivos en él. Puedes crear el directorio con el siguiente comando:
+```bash
+mkdir backup
+```
+Explicación:
+
+- mkdir backup: Este comando crea un nuevo directorio llamado backup.
+
+## Paso 2: Copiar algunos archivos al directorio backup
+Para este paso, puedes copiar archivos existentes a tu nuevo directorio. Por ejemplo, si tienes un archivo llamado archivo1.txt, puedes copiarlo así:
+```bash
+cp archivo1.txt backup/
+```
+Explicación:
+
+- cp archivo1.txt backup/: Este comando copia archivo1.txt al directorio backup.
+
+## Paso 3: Comprimir el directorio backup en un archivo .tar.gz
+Ahora, comprime el directorio backup en un archivo llamado backup.tar.gz utilizando el siguiente comando:
+```bash
+tar -czvf backup.tar.gz backup/
+```
+Explicación:
+
+- tar: Este comando se utiliza para crear y manipular archivos tar.
+- -c: Indica que deseas crear un nuevo archivo tar.
+- -z: Indica que deseas comprimir el archivo utilizando gzip.
+- -v: Muestra el progreso en la terminal (verbose).
+- -f: Indica que el siguiente argumento es el nombre del archivo tar que se va a crear.
+- backup/: Es el directorio que deseas comprimir.
+## Paso 4: Borrar el directorio original
+Una vez que hayas comprimido el directorio, puedes eliminar el directorio original backup:
+```bash
+rm -r backup
+```
+Explicación:
+
+- rm -r backup: Este comando elimina el directorio backup y su contenido de forma recursiva. Ten cuidado al usar este comando, ya que eliminará permanentemente los archivos.
+## Paso 5: Extraer el contenido del archivo comprimido
+Finalmente, extrae el contenido del archivo comprimido backup.tar.gz utilizando el siguiente comando:
+```bash
+tar -xzvf backup.tar.gz
+```
+Explicación:
+
+- -x: Indica que deseas extraer el contenido del archivo tar.
+- -z: Indica que el archivo está comprimido con gzip.
+- -v: Muestra el progreso en la terminal (verbose).
+- -f: Indica que el siguiente argumento es el nombre del archivo tar que se va a extraer.
+## Resumen
+Estos pasos te permiten practicar cómo comprimir y descomprimir archivos en un sistema Linux. Has aprendido a:
+- Crear un directorio y copiar archivos en él.
+- Comprimir un directorio en un archivo .tar.gz.
+- Eliminar un directorio y su contenido.
+- Extraer el contenido de un archivo comprimido.
+
+La compresión de archivos es una habilidad útil para ahorrar espacio en disco y facilitar la transferencia de archivos.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
