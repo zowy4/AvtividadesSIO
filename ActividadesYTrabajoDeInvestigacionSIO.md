@@ -351,7 +351,7 @@ if __name__ == "__main__":
 ```
 ## 2.Diseña un diagrama que represente el proceso de traducción de direcciones virtuales a físicas en un sistema con memoria virtual.
 
-![Diagrama en blanco](https://drive.google.com/file/d/1xuyB-BUMGtnGugICWaJzNllasqxldboi/view)
+![Diagrama en blanco](https://github.com/zowy4/AvtividadesSIO/blob/main/Diagrama%20en%20blanco.png)
 
 [Enlace al archivo](https://drive.google.com/file/d/1xuyB-BUMGtnGugICWaJzNllasqxldboi/view)
 
