@@ -1932,14 +1932,200 @@ Estos pasos te permiten practicar cómo comprimir y descomprimir archivos en un 
 - Extraer el contenido de un archivo comprimido.
 
 La compresión de archivos es una habilidad útil para ahorrar espacio en disco y facilitar la transferencia de archivos.
+# Ejercicio 5: Permisos y Propiedades de Archivos
 
+- **Objetivo:** Aprender a modificar permisos y propietarios de archivos.
 
+- Crea un archivo llamado `privado.txt`:
 
+```bash
+touch privado.txt
+```
+- Cambia los permisos del archivo para que solo el propietario pueda leer y escribir:
+```bash
+sudo chown usuario privado.txt
+```
+## Paso 1: Crear un archivo llamado `privado.txt`
+Primero, crea un archivo vacío llamado `privado.txt` utilizando el comando `touch`:
+```bash
+touch privado.txt
+```
+Explicación:
+- touch privado.txt: Este comando crea un nuevo archivo vacío llamado privado.txt. Si el archivo ya existe, simplemente actualiza su fecha de modificación.
 
+## Paso 2: Cambiar los permisos del archivo
+Ahora, cambia los permisos del archivo para que solo el propietario pueda leer y escribir. Utiliza el siguiente comando:
+```bash
+chmod 600 privado.txt
+```
+Explicación:
 
+- chmod: Este comando se utiliza para cambiar los permisos de acceso a archivos y directorios.
+- 600: Este valor establece los permisos. En este caso:
+   - 6 (lectura y escritura) para el propietario.
+   - 0 (sin permisos) para el grupo.
+  - 0 (sin permisos) para otros usuarios.
+- privado.txt: Es el archivo al que se le están cambiando los permisos.
+## Paso 3: Cambiar el propietario del archivo
+Si tienes privilegios de superusuario, puedes cambiar el propietario del archivo a otro usuario. Utiliza el siguiente comando:
+```bash
+sudo chown usuario privado.txt
+```
+Explicación:
 
+- sudo: Este comando permite ejecutar el siguiente comando con privilegios de superusuario.
+- chown: Este comando se utiliza para cambiar el propietario de un archivo o directorio.
+- usuario: Reemplaza esto con el nombre del usuario al que deseas transferir la propiedad del archivo.
+- privado.txt: Es el archivo cuyo propietario deseas cambiar.
+### Resumen
+Estos pasos te permiten practicar cómo modificar permisos y propietarios de archivos en un sistema Linux. Has aprendido a:
 
+- Crear un archivo.
+- Cambiar los permisos de un archivo para restringir el acceso.
+- Cambiar el propietario de un archivo (si tienes los privilegios necesarios).
 
+La gestión de permisos y propietarios es fundamental para la seguridad y la administración de sistemas en Linux
+
+# Ejercicio 6: Exploración de Dispositivos
+- Objetivo: Identificar discos y particiones en el sistema.
+- Usa `lsblk` para listar los discos y particiones:
+
+      lsblk
+- Usa `du -sh` para ver el tamaño del contenido en un directorio de tu elección:
+
+      du -sh /ruta/directorio
+- Verifica el uso de disco con `df -h`:
+
+      df -h
+
+## Paso 1: Listar discos y particiones
+Utiliza el siguiente comando para listar todos los discos y particiones conectados a tu sistema:
+```bash
+lsblk
+```
+Explicación:
+
+- lsblk: Este comando muestra una lista de todos los dispositivos de bloque (discos y particiones) en el sistema. La salida incluye información como el nombre del dispositivo, el tamaño, el tipo (partición, disco, etc.) y el punto de montaje (si está montado).
+## Paso 2: Ver el tamaño del contenido en un directorio
+Para ver el tamaño total del contenido en un directorio específico, utiliza el siguiente comando. Asegúrate de reemplazar /ruta/directorio con la ruta del directorio que deseas analizar:
+
+```bash
+du -sh /ruta/directorio
+```
+Explicación:
+
+- du: Este comando se utiliza para estimar el uso del espacio en disco de archivos y directorios.
+- -s: Muestra solo el total para cada argumento (no muestra el tamaño de cada subdirectorio).
+- -h: Muestra el tamaño en un formato legible para humanos (por ejemplo, KB, MB, GB).
+- /ruta/directorio: Es la ruta del directorio cuyo tamaño deseas verificar.
+## Paso 3: Verificar el uso de disco
+Para verificar el uso del disco en todo el sistema, utiliza el siguiente comando:
+
+```bash
+df -h
+```
+Explicación:
+
+- df: Este comando muestra información sobre el uso del espacio en disco de los sistemas de archivos montados.
+- -h: Muestra la información en un formato legible para humanos, utilizando unidades como KB, MB y GB.
+## Resumen
+Estos pasos te permiten explorar dispositivos y verificar el uso de disco en un sistema Linux. Has aprendido a:
+
+- Listar discos y particiones conectados al sistema.
+- Ver el tamaño total del contenido en un directorio específico.
+- Verificar el uso del disco en todo el sistema. 
+
+La exploración de dispositivos y la gestión del espacio en disco son habilidades esenciales para la administración de sistemas. 
+# Ejercicio 7: Crear y Formatear Particiones
+
+- **Objetivo:** Crear y formatear una nueva partición (Usar disco de práctica o máquina virtual).
+Identifica un disco no particionado:
+
+      sudo fdisk -l
+- Usa `fdisk` para crear una nueva partición:
+
+      sudo fdisk /dev/sdX
+- Formatea la partición como `ext4`:
+
+      sudo mkfs.ext4 /dev/sdX1
+- Monta la partición en un directorio y prueba escribiendo archivos en ella:
+
+      sudo mount /dev/sdX1 /mnt/nueva_particion
+      echo "Prueba de escritura" > /mnt/nueva_particion/test.txt
+
+# Paso 1: Identificar un disco no particionado
+Primero, identifica los discos y particiones en tu sistema utilizando el siguiente comando:
+
+```bash
+sudo fdisk -l
+```
+Explicación:
+
+- sudo: Ejecuta el comando con privilegios de superusuario.
+- fdisk -l: Muestra una lista de todos los discos y particiones en el sistema. Busca un disco que no tenga particiones (por ejemplo, /dev/sdX).
+## Paso 2: Usar fdisk para crear una nueva partición
+Una vez que hayas identificado un disco no particionado (reemplaza sdX con el identificador correcto del disco), utiliza fdisk para crear una nueva partición:
+```bash
+sudo fdisk /dev/sdX
+```
+Explicación:
+
+- ## fdisk /dev/sdX:
+Abre la herramienta `fdisk` para el disco especificado. A continuación, sigue estos pasos dentro de la interfaz de `fdisk`:
+
+1. Presiona `n` para crear una nueva partición.  
+2. Selecciona `p` para una partición primaria.  
+3. Elige el número de partición (generalmente `1` si es la primera).  
+4. Acepta los valores predeterminados para el primer y último sector (o especifica el tamaño si lo deseas).  
+5. Presiona `w` para escribir los cambios y salir.  
+
+## Paso 3: Formatear la partición como ext4
+Después de crear la partición, formátala como ext4 utilizando el siguiente comando (reemplaza `sdX1` con el identificador correcto de la nueva partición):
+```bash
+sudo mkfs.ext4 /dev/sdX1
+```
+Explicación:
+
+-  `mkfs.ext4`:
+Este comando se utiliza para crear un sistema de archivos ext4 en la partición especificada.
+
+- `/dev/sdX1`: Es la nueva partición que acabas de crear.
+
+## Paso 4: Montar la partición en un directorio
+Crea un directorio donde montarás la nueva partición y luego monta la partición:
+```bash
+sudo mkdir /mnt/nueva_particion
+sudo mount /dev/sdX1 /mnt/nueva_particion
+```
+Explicación:
+
+-  `mkdir /mnt/nueva_particion:` Crea un nuevo directorio llamado `nueva_particion` en `/mnt`.
+
+- `mount /dev/sdX1 /mnt/nueva_particion:`
+Monta la nueva partición en el directorio que acabas de crear.
+
+## Paso 5: Probar escribiendo archivos en la partición
+Finalmente, prueba escribir un archivo en la nueva partición:
+```bash
+echo "Prueba de escritura" > /mnt/nueva_particion/test.txt
+```
+Explicación:
+
+- echo "Prueba de escritura":
+Este comando genera el texto que deseas escribir.
+
+- > /mnt/nueva_particion/test.txt:
+Redirige la salida al archivo `test.txt` en la nueva partición.
+
+# Resumen
+Estos pasos te permiten crear y formatear una nueva partición en un sistema Linux. Has aprendido a:
+
+- Identificar discos y particiones en el sistema.
+- Crear una nueva partición utilizando `fdisk`.
+- Formatear la partición como ext4.
+- Montar la partición y escribir archivos en ella.
+
+La gestión de particiones es una habilidad esencial para la administración de sistemas y el manejo de almacenamiento.
 
 
 
